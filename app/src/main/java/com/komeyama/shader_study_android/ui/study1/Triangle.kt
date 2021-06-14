@@ -9,15 +9,16 @@ import java.nio.FloatBuffer
  * ref.
  * https://developer.android.com/training/graphics/opengl/shapes?hl=ja
  * https://developer.android.com/training/graphics/opengl/draw?hl=ja
+ * https://developer.android.com/training/graphics/opengl/projection?hl=ja
  */
 class Triangle {
 
     companion object {
         const val COORDS_PER_VERTEX = 3
         var triangleCoords = floatArrayOf(     // in counterclockwise order:
-            0.0f, 0.622008459f, 0.0f,      // top
-            -0.5f, -0.311004243f, 0.0f,    // bottom left
-            0.5f, -0.311004243f, 0.0f      // bottom right
+            0.0f, 0.4330127f, 0.0f,      // top
+            -0.5f, -0.4330127f, 0.0f,    // bottom left
+            0.5f, -0.4330127f, 0.0f      // bottom right
         )
     }
 
@@ -46,10 +47,14 @@ class Triangle {
     private val vertexCount: Int = triangleCoords.size / COORDS_PER_VERTEX
     private val vertexStride: Int = COORDS_PER_VERTEX * 4 // 4 bytes per vertex
 
+    // Use to access and set the view transformation
+    private var vPMatrixHandle: Int = 0
+
     private val vertexShaderCode =
-        "attribute vec4 vPosition;" +
+        "uniform mat4 uMVPMatrix;" +
+                "attribute vec4 vPosition;" +
                 "void main() {" +
-                "  gl_Position = vPosition;" +
+                "  gl_Position = uMVPMatrix * vPosition;" +
                 "}"
 
     private val fragmentShaderCode =
@@ -89,12 +94,19 @@ class Triangle {
         }
     }
 
-    fun draw() {
+    fun draw(mvpMatrix: FloatArray) { // pass in the calculated transformation matrix
+
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram)
 
         // get handle to vertex shader's vPosition member
         positionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition").also {
+
+            // get handle to shape's transformation matrix
+            vPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix")
+
+            // Pass the projection and view transformation to the shader
+            GLES20.glUniformMatrix4fv(vPMatrixHandle, 1, false, mvpMatrix, 0)
 
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
@@ -123,4 +135,5 @@ class Triangle {
             GLES20.glDisableVertexAttribArray(it)
         }
     }
+
 }
