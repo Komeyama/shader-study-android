@@ -16,9 +16,9 @@ class Triangle {
     companion object {
         const val COORDS_PER_VERTEX = 3
         var triangleCoords = floatArrayOf(     // in counterclockwise order:
-            0.0f, 0.4330127f, 0.0f,      // top
-            -0.5f, -0.4330127f, 0.0f,    // bottom left
-            0.5f, -0.4330127f, 0.0f      // bottom right
+            0.0f, 0.622008459f, 0.0f,      // top
+            -0.5f, -0.244016941f, 0.0f,    // bottom left
+            0.5f, -0.244016941f, 0.0f      // bottom right
         )
     }
 
