@@ -18,4 +18,11 @@ class Study1Fragment: Fragment() {
         gLView = MyGLSurfaceView(requireContext())
         return gLView
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        gLView.setOnTouchListener { _, motionEvent ->
+            gLView.onTouchEvent(motionEvent)
+        }
+    }
 }
