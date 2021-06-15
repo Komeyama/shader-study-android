@@ -2,13 +2,14 @@ package com.komeyama.shader_study_android.ui.study1
 
 import android.content.Context
 import android.opengl.GLSurfaceView
+import android.util.AttributeSet
 import android.view.MotionEvent
 
 /**
  * ref.
  * https://developer.android.com/training/graphics/opengl/environment?hl=ja
  */
-class MyGLSurfaceView(context: Context) : GLSurfaceView(context) {
+class MyGLSurfaceView(context: Context, attrs: AttributeSet) : GLSurfaceView(context, attrs) {
 
     companion object {
         private const val TOUCH_SCALE_FACTOR: Float = 180.0f / 320f
