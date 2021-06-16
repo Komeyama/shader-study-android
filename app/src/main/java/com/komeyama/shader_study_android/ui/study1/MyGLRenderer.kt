@@ -10,9 +10,9 @@ import javax.microedition.khronos.opengles.GL10
  * ref.
  * https://developer.android.com/training/graphics/opengl/environment?hl=ja
  */
-class MyGLRenderer: GLSurfaceView.Renderer {
+class MyGLRenderer : GLSurfaceView.Renderer {
 
-    private lateinit var mTriangle: Triangle
+    private var mTriangle: Triangle? = null
 
     // vPMatrix is an abbreviation for "Model View Projection Matrix"
     private val vPMatrix = FloatArray(16)
@@ -50,6 +50,10 @@ class MyGLRenderer: GLSurfaceView.Renderer {
         Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1f, 1f, 3f, 7f)
     }
 
+    fun changeTriangleColor(r: Float, g: Float, b: Float, a: Float) {
+        mTriangle?.color = floatArrayOf(r / 255.0f, g / 255.0f, b / 255.0f, a)
+    }
+
     private fun cameraViewConversion() {
         // Set the camera position (View matrix)
         Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 0f, 1.0f, 0.0f)
@@ -65,6 +69,6 @@ class MyGLRenderer: GLSurfaceView.Renderer {
         // Note that the vPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0)
-        mTriangle.draw(scratch)
+        mTriangle?.draw(scratch)
     }
 }

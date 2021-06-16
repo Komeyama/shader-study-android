@@ -20,7 +20,6 @@ class MyGLSurfaceView(context: Context, attrs: AttributeSet) : GLSurfaceView(con
 
     private val renderer: MyGLRenderer
 
-
     init {
 
         // Create an OpenGL ES 2.0 context
@@ -65,6 +64,9 @@ class MyGLSurfaceView(context: Context, attrs: AttributeSet) : GLSurfaceView(con
         previousX = x
         previousY = y
         return true
+    }
 
+    fun changeTriangleColor(rgba: FloatArray) {
+        renderer.changeTriangleColor(rgba[0], rgba[1], rgba[2], rgba[3])
     }
 }

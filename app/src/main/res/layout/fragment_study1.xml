@@ -8,16 +8,62 @@
         android:id="@+id/my_gl_surface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stepSize="1.0"
+            android:valueFrom="0.0"
+            android:valueTo="255.0"
+            android:value="128"
+            app:tickColor="@color/red"
+            app:trackColorActive="@color/red"
+            app:trackColorInactive="@color/red"
+            app:thumbColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider_g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stepSize="1.0"
+            android:valueFrom="0.0"
+            android:valueTo="255.0"
+            android:value="128"
+            app:tickColor="@color/green"
+            app:trackColorActive="@color/green"
+            app:trackColorInactive="@color/green"
+            app:thumbColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/slider_r"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stepSize="1.0"
+            android:valueFrom="0.0"
+            android:valueTo="255.0"
+            android:value="128"
+            app:tickColor="@color/blue"
+            app:trackColorActive="@color/blue"
+            app:trackColorInactive="@color/blue"
+            app:thumbColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/slider_g"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

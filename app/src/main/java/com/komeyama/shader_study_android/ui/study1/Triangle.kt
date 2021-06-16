@@ -22,7 +22,8 @@ class Triangle {
         )
     }
 
-    private val color = floatArrayOf(0.63671875f, 0.76953125f, 0.22265625f, 1.0f)
+    @Volatile
+    var color = floatArrayOf(128f / 255f, 128f / 255f, 128f / 255f, 1.0f)
 
     private var vertexBuffer: FloatBuffer =
         // (number of coordinate values * 4 bytes per float)
