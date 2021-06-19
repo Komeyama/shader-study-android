@@ -10,7 +10,7 @@ import com.komeyama.shader_study_android.R
 import com.komeyama.shader_study_android.databinding.FragmentStudy2Binding
 
 class Study2Fragment: Fragment(R.layout.fragment_study2) {
-    private lateinit var glView: MyGLSurfaceView2
+    private lateinit var glViewSurfaceView: Study2SurfaceView
     private var _binding: FragmentStudy2Binding? = null
     private val binding get() = _binding!!
 
@@ -26,10 +26,10 @@ class Study2Fragment: Fragment(R.layout.fragment_study2) {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        glView = binding.myGlSurface
+        glViewSurfaceView = binding.myGlSurface
 
         binding.sliderConversionFactor.addOnChangeListener{ _, value, _ ->
-            glView.changeConversionFactor(value)
+            glViewSurfaceView.changeConversionFactor(value)
         }
     }
 

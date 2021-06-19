@@ -6,7 +6,7 @@ import android.opengl.Matrix
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-abstract class RenderBase : GLSurfaceView.Renderer {
+abstract class GLRendererBase : GLSurfaceView.Renderer {
 
     protected val vPMatrix = FloatArray(16)
     private val projectionMatrix = FloatArray(16)

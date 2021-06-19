@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.komeyama.shader_study_android.ui.study2.MyGLSurfaceView2
+    <com.komeyama.shader_study_android.ui.study2.Study2SurfaceView
         android:id="@+id/my_gl_surface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

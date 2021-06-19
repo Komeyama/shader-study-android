@@ -1,11 +1,11 @@
 package com.komeyama.shader_study_android.ui.study1
 
 import android.opengl.Matrix
-import com.komeyama.shader_study_android.ui.base.RenderBase
+import com.komeyama.shader_study_android.ui.base.GLRendererBase
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-class MyGLRenderer : RenderBase() {
+class Study1Renderer : GLRendererBase() {
 
     private var triangle: Triangle? = null
     private val rotationMatrix = FloatArray(16)

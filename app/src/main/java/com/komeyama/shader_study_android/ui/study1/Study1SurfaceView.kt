@@ -1,15 +1,11 @@
 package com.komeyama.shader_study_android.ui.study1
 
 import android.content.Context
-import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import android.view.MotionEvent
+import com.komeyama.shader_study_android.ui.base.GLSurfaceViewBase
 
-/**
- * ref.
- * https://developer.android.com/training/graphics/opengl/environment?hl=ja
- */
-class MyGLSurfaceView(context: Context, attrs: AttributeSet) : GLSurfaceView(context, attrs) {
+class Study1SurfaceView(context: Context, attrs: AttributeSet) : GLSurfaceViewBase(context, attrs) {
 
     companion object {
         private const val TOUCH_SCALE_FACTOR: Float = 180.0f / 320f
@@ -18,24 +14,11 @@ class MyGLSurfaceView(context: Context, attrs: AttributeSet) : GLSurfaceView(con
     private var previousX: Float = 0f
     private var previousY: Float = 0f
 
-    private val renderer: MyGLRenderer
-
-    init {
-
-        // Create an OpenGL ES 2.0 context
-        setEGLContextClientVersion(2)
-
-        renderer = MyGLRenderer()
-
-        // Set the Renderer for drawing on the GLSurfaceView
-        setRenderer(renderer)
+    override fun getRendererInstance(): Renderer {
+        return Study1Renderer()
     }
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
-
-        // MotionEvent reports input details from the touch screen
-        // and other input controls. In this case, you are only
-        // interested in events where the touch position changed.
 
         val x: Float = e.x
         val y: Float = e.y
@@ -56,7 +39,7 @@ class MyGLSurfaceView(context: Context, attrs: AttributeSet) : GLSurfaceView(con
                     dy *= -1
                 }
 
-                renderer.angle += (dx + dy) * TOUCH_SCALE_FACTOR
+                (renderer as Study1Renderer).angle += (dx + dy) * TOUCH_SCALE_FACTOR
                 requestRender()
             }
         }
@@ -67,6 +50,7 @@ class MyGLSurfaceView(context: Context, attrs: AttributeSet) : GLSurfaceView(con
     }
 
     fun changeTriangleColor(rgba: FloatArray) {
-        renderer.changeTriangleColor(rgba[0], rgba[1], rgba[2], rgba[3])
+        (renderer as Study1Renderer).changeTriangleColor(rgba[0], rgba[1], rgba[2], rgba[3])
     }
+
 }
