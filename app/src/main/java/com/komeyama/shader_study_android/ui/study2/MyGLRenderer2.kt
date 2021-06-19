@@ -29,7 +29,7 @@ class MyGLRenderer2 : GLSurfaceView.Renderer {
     }
 
     fun changeConversionFactor(conversionQuantity: Float) {
-        square?.conversionFactor = conversionQuantity
+        square?.timeFactor = conversionQuantity
     }
 
     private fun homography(width: Int, height: Int) {
