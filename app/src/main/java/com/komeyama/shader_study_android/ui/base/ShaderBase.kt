@@ -71,7 +71,7 @@ abstract class ShaderBase {
         mTimeHandle = GLES20.glGetUniformLocation(program, "vTime").also {
             GLES20.glUniform1f(
                 it,
-                ((SystemClock.uptimeMillis() - startTime)).toFloat() * 1000.0f
+                ((SystemClock.uptimeMillis() - startTime)).toFloat() * 0.001f
             )
         }
 
