@@ -26,7 +26,7 @@ class Study2Fragment: Fragment(R.layout.fragment_study2) {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        glViewSurfaceView = binding.myGlSurface
+        glViewSurfaceView = binding.glSurfaceStudy2
 
         binding.sliderConversionFactor.addOnChangeListener{ _, value, _ ->
             glViewSurfaceView.changeConversionFactor(value)

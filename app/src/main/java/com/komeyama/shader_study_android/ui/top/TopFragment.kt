@@ -17,7 +17,8 @@ class TopFragment : Fragment(R.layout.fragment_top) {
     private val titleList: Map<String, Int> =
         mapOf(
             "Triangle" to R.id.action_topFragment_to_study1Fragment,
-            "Square" to R.id.action_topFragment_to_study2Fragment
+            "Square" to R.id.action_topFragment_to_study2Fragment,
+            "Light Sphere" to R.id.action_topFragment_to_study3Fragment
         )
 
     override fun onCreateView(

@@ -28,7 +28,7 @@ class Study1Fragment : Fragment(R.layout.fragment_study1) {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        glView = binding.myGlSurface
+        glView = binding.glSurfaceStudy1
         glView.setOnTouchListener { _, motionEvent ->
             glView.onTouchEvent(motionEvent)
         }
