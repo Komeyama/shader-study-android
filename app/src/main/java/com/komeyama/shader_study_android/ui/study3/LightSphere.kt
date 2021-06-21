@@ -32,9 +32,19 @@ class LightSphere(
                 "uniform vec2 vResolution;" +
                 "uniform float vTime;" +
                 "uniform vec3 vRGB;" +
+                "const float pi = 3.1415927;" +
+                "" +
+                "vec2 rot(float rad){" +
+                "   return vec2(sin(rad),cos(rad));" +
+                "}" +
+                "" +
                 "void main(void){" +
                 "   vec2 p = (gl_FragCoord.xy * 2.0 - vResolution) / min(vResolution.x, vResolution.y);" +
                 "   float l = 0.1 / length(p);" +
+                "   l += 0.1 / length(p + 0.5 * rot(vTime + 0.0));" +
+                "   l += 0.1 / length(p + 0.5 * rot(vTime + pi / 2.0));" +
+                "   l += 0.1 / length(p + 0.5 * rot(vTime + pi));" +
+                "   l += 0.1 / length(p + 0.5 * rot(vTime + pi * (3.0/2.0)));" +
                 "   gl_FragColor = vec4(l*vRGB, 1.0);" +
                 "}"
     }
