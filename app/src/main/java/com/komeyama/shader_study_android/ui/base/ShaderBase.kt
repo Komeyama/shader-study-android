@@ -60,25 +60,25 @@ abstract class ShaderBase {
     fun draw(mvpMatrix: FloatArray) {
         GLES20.glUseProgram(program)
 
-        vPMatrixHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix").also {
-            GLES20.glUniformMatrix4fv(it, 1, false, mvpMatrix, 0)
+        vPMatrixHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix").also { mvpMatrixHandle ->
+            GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
         }
 
         mColorHandle = GLES20.glGetUniformLocation(program, "vColor").also { colorHandle ->
             GLES20.glUniform4fv(colorHandle, 1, initColor, 0)
         }
 
-        mTimeHandle = GLES20.glGetUniformLocation(program, "vTime").also {
+        mTimeHandle = GLES20.glGetUniformLocation(program, "vTime").also { timeHandle ->
             GLES20.glUniform1f(
-                it,
+                timeHandle,
                 ((SystemClock.uptimeMillis() - startTime)).toFloat() * 0.001f
             )
         }
 
-        positionHandle = GLES20.glGetAttribLocation(program, "vPosition").also {
-            GLES20.glEnableVertexAttribArray(it)
+        positionHandle = GLES20.glGetAttribLocation(program, "vPosition").also { positionHandle ->
+            GLES20.glEnableVertexAttribArray(positionHandle)
             GLES20.glVertexAttribPointer(
-                it,
+                positionHandle,
                 COORDINATES_PER_VERTEX,
                 GLES20.GL_FLOAT,
                 false,

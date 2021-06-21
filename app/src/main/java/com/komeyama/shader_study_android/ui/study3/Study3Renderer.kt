@@ -25,6 +25,10 @@ class Study3Renderer: GLRendererBase() {
         lightSphere?.resolution = floatArrayOf(width.toFloat(), height.toFloat())
     }
 
+    fun changeRGB(rgb: FloatArray) {
+        lightSphere?.rgb = rgb
+    }
+
     private fun draw() {
         val scratch = FloatArray(16)
         val angle = 0f

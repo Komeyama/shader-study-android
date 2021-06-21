@@ -15,6 +15,7 @@ class LightSphere(
 ) : ShaderBase() {
 
     var resolution = floatArrayOf(0.0f, 0.0f)
+    var rgb = floatArrayOf(0.5f, 0.5f, 0.5f)
 
     override fun vertexShaderCode(): String {
         return "" +
@@ -30,16 +31,20 @@ class LightSphere(
                 "precision mediump float;" +
                 "uniform vec2 vResolution;" +
                 "uniform float vTime;" +
+                "uniform vec3 vRGB;" +
                 "void main(void){" +
                 "   vec2 p = (gl_FragCoord.xy * 2.0 - vResolution) / min(vResolution.x, vResolution.y);" +
                 "   float l = 0.1 / length(p);" +
-                "   gl_FragColor = vec4(vec3(l), 1.0);" +
+                "   gl_FragColor = vec4(l*vRGB, 1.0);" +
                 "}"
     }
 
     override fun handleFragmentParameter() {
-        GLES20.glGetUniformLocation(program, "vResolution").also {
-            GLES20.glUniform2fv(it, 1, resolution, 0)
+        GLES20.glGetUniformLocation(program, "vResolution").also { resolutionHandle ->
+            GLES20.glUniform2fv(resolutionHandle, 1, resolution, 0)
+        }
+        GLES20.glGetUniformLocation(program, "vRGB").also { rgbHandle ->
+            GLES20.glUniform3fv(rgbHandle, 1, rgb, 0)
         }
     }
 }
