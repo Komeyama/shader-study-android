@@ -109,7 +109,6 @@ class Study4Renderer(private val context: Context) : GLRendererBase() {
             Matrix.setRotateM(rotationMatrix, 0, angle, 0f, 0f, -1.0f)
             Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0)
             line?.draw(scratch)
-            //vPMatrix = FloatArray(16)
         }
     }
 
