@@ -74,6 +74,7 @@ class Study4Renderer(private val context: Context) : GLRendererBase() {
     }
 
     fun changeColor(rgb: FloatArray) {
+        points.clear()
         line?.initColor = rgb
     }
 
