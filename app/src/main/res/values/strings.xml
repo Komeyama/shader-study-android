@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">shader-study-android</string>
     <string name="coming_soon">coming soon!</string>
+    <string name="clear_button">Clear</string>
+    <string name="color_black">Black</string>
+    <string name="color_red">Red</string>
+    <string name="color_green">Green</string>
+    <string name="color_blue">Blue</string>
 </resources>

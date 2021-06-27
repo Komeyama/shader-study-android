@@ -57,7 +57,7 @@ abstract class ShaderBase {
         }
     }
 
-    fun draw(mvpMatrix: FloatArray) {
+    open fun draw(mvpMatrix: FloatArray) {
         GLES20.glUseProgram(program)
 
         vPMatrixHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix").also { mvpMatrixHandle ->

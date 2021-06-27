@@ -18,7 +18,8 @@ class TopFragment : Fragment(R.layout.fragment_top) {
         mapOf(
             "Triangle" to R.id.action_topFragment_to_study1Fragment,
             "Square" to R.id.action_topFragment_to_study2Fragment,
-            "Light Sphere" to R.id.action_topFragment_to_study3Fragment
+            "Light Sphere" to R.id.action_topFragment_to_study3Fragment,
+            "Sketchpad" to R.id.action_topFragment_to_study4Fragment
         )
 
     override fun onCreateView(

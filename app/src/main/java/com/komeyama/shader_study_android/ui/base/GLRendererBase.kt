@@ -26,7 +26,7 @@ abstract class GLRendererBase : GLSurfaceView.Renderer {
         homography(width, height)
     }
 
-    private fun cameraViewConversion() {
+    protected fun cameraViewConversion() {
         Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 0f, 1.0f, 0.0f)
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
     }
@@ -34,5 +34,9 @@ abstract class GLRendererBase : GLSurfaceView.Renderer {
     private fun homography(width: Int, height: Int) {
         val ratio: Float = width.toFloat() / height.toFloat()
         Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1f, 1f, 3f, 7f)
+    }
+
+    protected fun homography() {
+        Matrix.frustumM(projectionMatrix, 0, -1f, 1f, -1f, 1f, 3f, 7f)
     }
 }
