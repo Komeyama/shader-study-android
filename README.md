@@ -6,6 +6,6 @@ This is a repository for studying 3D graphics using OpenGL ES on android.
 |:---:|:---:|:---:|
 |Triangle|Square|Light Sphere|
 
-|<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/sketchpad.gif" width="230">|
-|:---:|
-|Sketchpad|
+|<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/sketchpad.gif" width="230">|<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/light_ring.png" width="230">|
+|:---:|:---:|
+|Sketchpad|Light Ring|
