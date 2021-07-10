@@ -6,7 +6,7 @@ import com.komeyama.shader_study_android.ui.base.ShaderBase
 /**
  * ref. https://wgld.org/d/glsl/g005.html
  */
-class Mandelbrot (
+class Mandelbrot(
     override val drawOrder: ShortArray = shortArrayOf(0, 1, 2, 0, 2, 3),
     override val vertexCoordinates: FloatArray = floatArrayOf(
         -1f, 1f, 0f,
@@ -18,7 +18,8 @@ class Mandelbrot (
 ) : ShaderBase() {
 
     var resolution = floatArrayOf(0.0f, 0.0f)
-    var dragPosition = floatArrayOf(0.5f, 0.5f)
+    var centerPosition = floatArrayOf(0.0f, 0.0f)
+    var scaleFactor = 1.0f
 
     override fun vertexShaderCode(): String {
         return "" +
@@ -34,7 +35,8 @@ class Mandelbrot (
                 "precision mediump float;" +
                 "uniform float vTime;" +
                 "uniform vec2 vResolution;" +
-                "uniform vec2 vDrag;" +
+                "uniform vec2 vDragPos;" +
+                "uniform float vScale;" +
                 "" +
                 "vec3 hsv(float h, float s, float v){" +
                 "    vec4 t = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);" +
@@ -45,8 +47,8 @@ class Mandelbrot (
                 "void main(void){" +
                 "    vec2 p = (gl_FragCoord.xy * 2.0 - vResolution) / min(vResolution.x, vResolution.y);" +
                 "    int j = 0;" +
-                "    vec2  x = p + vec2(-0.5, 0.0);" +
-                "    float y = 1.5 - vDrag.x * 0.5;" +
+                "    vec2  x = p + vec2(- 0.5 + vDragPos.x, vDragPos.y);" +
+                "    float y = 1.5 - vScale * 0.5;" +
                 "    vec2  z = vec2(0.0, 0.0);" +
                 "" +
                 "    for(int i = 0; i < 360; i++){" +
@@ -68,8 +70,12 @@ class Mandelbrot (
             GLES20.glUniform2fv(resolutionHandle, 1, resolution, 0)
         }
 
-        GLES20.glGetUniformLocation(program, "vDrag").also { dragHandle ->
-            GLES20.glUniform2fv(dragHandle, 1, dragPosition, 0)
+        GLES20.glGetUniformLocation(program, "vDragPos").also { resolutionHandle ->
+            GLES20.glUniform2fv(resolutionHandle, 1, centerPosition, 0)
+        }
+
+        GLES20.glGetUniformLocation(program, "vScale").also { dragHandle ->
+            GLES20.glUniform1f(dragHandle, scaleFactor)
         }
     }
 

@@ -33,7 +33,11 @@ class Study6Renderer: GLRendererBase() {
         mandelbrot?.draw(scratch)
     }
 
-    fun dragPosition(pos: FloatArray) {
-        mandelbrot?.dragPosition = pos
+    fun setScale(scale: Float) {
+        mandelbrot?.scaleFactor = scale
+    }
+
+    fun setCenterPosition(pos: FloatArray) {
+        mandelbrot?.centerPosition = pos
     }
 }
