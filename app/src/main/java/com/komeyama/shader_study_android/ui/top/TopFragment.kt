@@ -21,7 +21,8 @@ class TopFragment : Fragment(R.layout.fragment_top) {
             "Light Sphere" to R.id.action_topFragment_to_study3Fragment,
             "Sketchpad" to R.id.action_topFragment_to_study4Fragment,
             "Light Ring" to R.id.action_topFragment_to_study5Fragment,
-            "Mandelbrot" to R.id.action_topFragment_to_study6Fragment
+            "Mandelbrot" to R.id.action_topFragment_to_study6Fragment,
+            "White Noise" to R.id.action_topFragment_to_study7Fragment
         )
 
     override fun onCreateView(
