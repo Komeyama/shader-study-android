@@ -11,4 +11,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider_conversion_factor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stepSize="1.0"
+            android:value="1.0"
+            android:valueFrom="1.0"
+            android:valueTo="1000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbColor="@color/white"
+            app:tickColor="@color/white"
+            app:trackColorActive="@color/white"
+            app:trackColorInactive="@color/white" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

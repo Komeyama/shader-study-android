@@ -9,4 +9,8 @@ class Study7SurfaceView(context: Context, attrs: AttributeSet) : GLSurfaceViewBa
     override fun getRendererInstance(): Renderer {
         return Study7Renderer()
     }
+
+    fun changeConversionFactor(conversionQuantity: Float) {
+        (renderer as Study7Renderer).changeConversionFactor(conversionQuantity)
+    }
 }
