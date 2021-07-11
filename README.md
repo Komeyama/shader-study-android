@@ -9,3 +9,7 @@ This is a repository for studying 3D graphics using OpenGL ES on android.
 |<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/sketchpad.gif" width="230">|<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/light_ring.png" width="230">|<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/mandelbrot.gif" width="230">|
 |:---:|:---:|:---:|
 |Sketchpad|Light Ring|Mandelbrot|
+
+|<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/white_noise.gif" width="230">|
+|:---:|
+|White Noise|
