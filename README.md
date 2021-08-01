@@ -12,4 +12,4 @@ This is a repository for studying 3D graphics using OpenGL ES on android.
 
 |<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/white_noise.gif" width="230">|<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/expanding_circle.gif" width="230">|<img src="https://github.com/Komeyama/shader-study-android/blob/main/art/galaxy.gif" width="230">|
 |:---:|:---:|:---:|
-|White Noise|Expanding Circle|Galaxy|
+|White Noise|Expanding Circle<br> ref. iOS app ｢Woahdude｣|Galaxy<br> ref. iOS app ｢Woahdude｣|
