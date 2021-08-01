@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_topFragment_to_study8Fragment"
             app:destination="@id/study8Fragment" />
+        <action
+            android:id="@+id/action_topFragment_to_study9Fragment"
+            app:destination="@id/study9Fragment" />
     </fragment>
     <fragment
         android:id="@+id/study1Fragment"
@@ -65,4 +68,8 @@
         android:id="@+id/study8Fragment"
         android:name="com.komeyama.shader_study_android.ui.study8.Study8Fragment"
         android:label="Study8Fragment" />
+    <fragment
+        android:id="@+id/study9Fragment"
+        android:name="com.komeyama.shader_study_android.ui.study9.Study9Fragment"
+        android:label="Study9Fragment" />
 </navigation>
