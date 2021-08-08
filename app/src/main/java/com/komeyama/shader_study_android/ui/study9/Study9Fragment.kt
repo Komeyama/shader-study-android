@@ -27,6 +27,10 @@ class Study9Fragment : Fragment(R.layout.fragment_study9) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         glView = binding.glSurfaceStudy9
+
+        binding.sliderConversionFactor.addOnChangeListener{ _, value, _ ->
+            glView.changeConversionFactor(value)
+        }
     }
 
     override fun onDestroyView() {

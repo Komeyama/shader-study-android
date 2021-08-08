@@ -25,6 +25,10 @@ class Study9Renderer: GLRendererBase() {
         draw()
     }
 
+    fun changeConversionFactor(conversionQuantity: Float) {
+        galaxy?.factor = conversionQuantity
+    }
+
     private fun draw() {
         val scratch = FloatArray(16)
         val angle = 0f

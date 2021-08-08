@@ -19,6 +19,8 @@ class Galaxy(
 
     var resolution = floatArrayOf(0.0f, 0.0f)
 
+    var factor = 1.0f
+
     override fun vertexShaderCode(): String {
         return "" +
                 "uniform mat4 uMVPMatrix;" +
@@ -34,6 +36,7 @@ class Galaxy(
                 "" +
                 "uniform float vTime;" +
                 "uniform vec2 vResolution;" +
+                "uniform float factor;" +
                 "" +
                 "const float pi = 3.1415926;" +
                 "const int iterations = 10;" +
@@ -49,7 +52,7 @@ class Galaxy(
                 "void main() {" +
                 "   vec2 uv = (gl_FragCoord.xy * 2.0 - vResolution) / min(vResolution.x, vResolution.y);" +
                 "" +
-                "   float time_viewing = vTime;" +
+                "   float time_viewing = vTime * factor;" +
                 "   float speed = 0.01 * cos(time_viewing * 0.02 + pi/4.0);" +
                 "   float formuparam = 0.79;" +
                 "" +
@@ -145,6 +148,10 @@ class Galaxy(
     override fun handleFragmentParameter() {
         GLES20.glGetUniformLocation(program, "vResolution").also { resolutionHandle ->
             GLES20.glUniform2fv(resolutionHandle, 1, resolution, 0)
+        }
+
+        GLES20.glGetUniformLocation(program, "factor").also { factorHandle ->
+            GLES20.glUniform1f(factorHandle, factor)
         }
     }
 }
