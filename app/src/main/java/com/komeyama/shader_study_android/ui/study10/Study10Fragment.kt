@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.komeyama.shader_study_android.R
 import com.komeyama.shader_study_android.databinding.FragmentStudy10Binding
 
-class Study10Fragment : Fragment(R.layout.fragment_study9) {
+class Study10Fragment : Fragment(R.layout.fragment_study10) {
     private lateinit var glView: Study10SurfaceView
     private var _binding: FragmentStudy10Binding? = null
     private val binding get() = _binding!!
