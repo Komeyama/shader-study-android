@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/topFragment"
         android:name="com.komeyama.shader_study_android.ui.top.TopFragment"
-        android:label="TopFragment" >
+        android:label="TopFragment">
         <action
             android:id="@+id/action_topFragment_to_study1Fragment"
             app:destination="@id/study1Fragment" />
@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_topFragment_to_study10Fragment"
             app:destination="@id/study10Fragment" />
+        <action
+            android:id="@+id/action_topFragment_to_study11Fragment"
+            app:destination="@id/study11Fragment" />
     </fragment>
     <fragment
         android:id="@+id/study1Fragment"
@@ -78,5 +81,9 @@
     <fragment
         android:id="@+id/study10Fragment"
         android:name="com.komeyama.shader_study_android.ui.study10.Study10Fragment"
+        android:label="Study10Fragment" />
+    <fragment
+        android:id="@+id/study11Fragment"
+        android:name="com.komeyama.shader_study_android.ui.study11.Study11Fragment"
         android:label="Study10Fragment" />
 </navigation>
