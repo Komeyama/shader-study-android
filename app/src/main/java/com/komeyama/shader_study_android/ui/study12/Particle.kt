@@ -22,6 +22,7 @@ class Particle(
 
     private var position = mutableListOf<Float>()
     private var vector = mutableListOf<Float>()
+    private val velocityFactor = 0.02f
     private var resolutionX = 100
     private var resolutionY = 100
     private var intervalX = 1.0 / resolutionX
@@ -86,8 +87,8 @@ class Particle(
                 )
                 vector[l] = p[0]
                 vector[l + 1] = p[1]
-                position[l] += vector[l] * 0.02f //* velocity * SPEED
-                position[l + 1] += vector[l + 1] * 0.02f //* velocity * SPEED
+                position[l] += vector[l] * velocityFactor
+                position[l + 1] += vector[l + 1] * velocityFactor
             }
         }
         setPoints()
