@@ -4,23 +4,24 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import com.komeyama.shader_study_android.ui.base.GLSurfaceViewBase
+import com.komeyama.shader_study_android.ui.utils.SequenceRGBChangeUtils
+import com.komeyama.shader_study_android.ui.utils.dto.RGB
 import java.util.*
 import kotlin.concurrent.scheduleAtFixedRate
 
 class Study12SurfaceView(context: Context, attrs: AttributeSet) :
     GLSurfaceViewBase(context, attrs) {
 
+    private var t = 0f
+    private var currentRGB = RGB(255, 0, 0)
+
     private var downTime = 0L
+    private var timeFactor = 0.0005f
     private val period = 6000
     private var upTimer = Timer()
-    private var elapsedTime = 0
+    private var upElapsedTime = 0
     private var decreaseInterval = 100L
     private var decreaseFactor = 30f
-    private val timeFactor = 0.0005
-    private var r = 255f
-    private var g = 0f
-    private var b = 0f
-    private var t = 0f
 
     override fun getRendererInstance(): Renderer {
         return Study12Renderer(context)
@@ -39,7 +40,7 @@ class Study12SurfaceView(context: Context, attrs: AttributeSet) :
             MotionEvent.ACTION_MOVE -> {
                 (renderer as? Study12Renderer)?.updateMousePosition(e.x, e.y)
                 changeColor()
-                t += ((e.eventTime - downTime) * timeFactor).toFloat()
+                t += ((e.eventTime - downTime) * timeFactor)
                 if (t > period) {
                     t = 0f
                     downTime = e.eventTime
@@ -53,27 +54,10 @@ class Study12SurfaceView(context: Context, attrs: AttributeSet) :
     }
 
     private fun changeColor() {
-        when (t) {
-            in 0f..1000f -> {
-                g = 255f * t / 1000f
-            }
-            in 1001f..2000f -> {
-                r = 255f * (1f - (t / 2000f))
-            }
-            in 2001f..3000f -> {
-                b = 255f * (t / 3000f)
-            }
-            in 3001f..4000f -> {
-                g = 255f * (1f - (t / 4000f))
-            }
-            in 4001f..5000f -> {
-                r = 255f * (t / 5000f)
-            }
-            in 5001f..6000f -> {
-                b = 255f * (1f - (t / 6000f))
-            }
-        }
-        (renderer as? Study12Renderer)?.updateColor(floatArrayOf(r / 255f, g / 255f, b / 255f, 1f))
+        currentRGB = SequenceRGBChangeUtils.changeColor(t, currentRGB)
+        val updateColor =
+            floatArrayOf(currentRGB.r / 255f, currentRGB.g / 255f, currentRGB.b / 255f, 1f)
+        (renderer as? Study12Renderer)?.updateColor(updateColor)
     }
 
     private fun decreaseColor() {
@@ -83,9 +67,9 @@ class Study12SurfaceView(context: Context, attrs: AttributeSet) :
 
     private val upTimerTask = object : (TimerTask) -> Unit {
         override fun invoke(p1: TimerTask) {
-            val decreaseR = r * (1 - (elapsedTime / decreaseFactor))
-            val decreaseG = g * (1 - (elapsedTime / decreaseFactor))
-            val decreaseB = b * (1 - (elapsedTime / decreaseFactor))
+            val decreaseR = currentRGB.r * (1 - (upElapsedTime / decreaseFactor))
+            val decreaseG = currentRGB.g * (1 - (upElapsedTime / decreaseFactor))
+            val decreaseB = currentRGB.b * (1 - (upElapsedTime / decreaseFactor))
             (renderer as? Study12Renderer)?.updateColor(
                 floatArrayOf(
                     decreaseR / 255f,
@@ -94,8 +78,8 @@ class Study12SurfaceView(context: Context, attrs: AttributeSet) :
                     1f
                 )
             )
-            elapsedTime += 1
-            if (elapsedTime > 30) {
+            upElapsedTime += 1
+            if (upElapsedTime > 30) {
                 stopTimer()
             }
         }
@@ -103,6 +87,6 @@ class Study12SurfaceView(context: Context, attrs: AttributeSet) :
 
     private fun stopTimer() {
         upTimer.cancel()
-        elapsedTime = 0
+        upElapsedTime = 0
     }
 }
