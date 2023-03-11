@@ -42,6 +42,7 @@ class Study12SurfaceView(context: Context, attrs: AttributeSet) :
                 t += ((e.eventTime - downTime) * timeFactor).toFloat()
                 if (t > period) {
                     t = 0f
+                    downTime = e.eventTime
                 }
             }
             MotionEvent.ACTION_UP -> {

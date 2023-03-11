@@ -40,7 +40,6 @@ class Cube(
 
     override val initColor: FloatArray = floatArrayOf(1.0f, 0.0f, 0.0f, 1.0f)
 ) : ShaderBase() {
-    var mvpMatrix = floatArrayOf()
 
     override fun vertexShaderCode(): String {
         return "" +

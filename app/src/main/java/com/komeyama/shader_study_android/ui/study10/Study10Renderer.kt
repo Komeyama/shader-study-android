@@ -12,7 +12,6 @@ class Study10Renderer : GLRendererBase() {
 
     private var cube: Cube? = null
     private val scratch = FloatArray(16)
-    private val cubeViewMatrix = FloatArray(16)
 
     private var aspect = 0f
 
@@ -51,7 +50,6 @@ class Study10Renderer : GLRendererBase() {
     }
 
     private fun draw() {
-        cube?.mvpMatrix = cubeViewMatrix
         cube?.draw(scratch)
     }
 
