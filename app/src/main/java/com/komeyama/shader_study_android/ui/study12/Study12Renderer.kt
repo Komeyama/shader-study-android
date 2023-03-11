@@ -2,6 +2,7 @@ package com.komeyama.shader_study_android.ui.study12
 
 import android.content.Context
 import android.opengl.Matrix
+import com.komeyama.shader_study_android.MainActivity
 import com.komeyama.shader_study_android.ui.base.GLRendererBase
 import javax.microedition.khronos.opengles.GL10
 
@@ -29,8 +30,9 @@ class Study12Renderer(val context: Context) : GLRendererBase() {
     }
 
     fun updateMousePosition(x: Float, y: Float) {
+        val ratio = MainActivity.displayHeight.toFloat() / MainActivity.displayWidth.toFloat()
         val xx = (x / width) - 0.5f
-        val yy = (y / height) - 0.5f
+        val yy = ((y / height) - 0.5f) * ratio
         particle?.mousePosition = floatArrayOf(-xx, -yy)
     }
 
