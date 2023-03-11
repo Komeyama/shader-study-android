@@ -28,13 +28,14 @@ class TopFragment : Fragment(R.layout.fragment_top) {
             "Cube" to R.id.action_topFragment_to_study10Fragment,
             "Blur" to R.id.action_topFragment_to_study11Fragment,
             "Particle" to R.id.action_topFragment_to_study12Fragment,
+            "ParticlesBox" to R.id.action_topFragment_to_study13Fragment,
         )
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTopBinding.inflate(inflater, container, false)
         return binding.root
     }
