@@ -28,7 +28,8 @@ class TopFragment : Fragment(R.layout.fragment_top) {
             "Cube" to R.id.action_topFragment_to_study10Fragment,
             "Blur" to R.id.action_topFragment_to_study11Fragment,
             "Particle" to R.id.action_topFragment_to_study12Fragment,
-            "ParticlesBox" to R.id.action_topFragment_to_study13Fragment,
+            "Box of particles" to R.id.action_topFragment_to_study13Fragment,
+            "Picture of particles" to R.id.action_topFragment_to_study14Fragment,
         )
 
     override fun onCreateView(
