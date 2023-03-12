@@ -2,14 +2,14 @@ package com.komeyama.shader_study_android.ui.study14
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
-import android.os.Build
-import androidx.annotation.RequiresApi
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import com.komeyama.shader_study_android.ui.base.ShaderBase
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
 
-@RequiresApi(Build.VERSION_CODES.Q)
 class ParticlesPicture(
     override val drawOrder: ShortArray = shortArrayOf(),
     override val vertexCoordinates: FloatArray = floatArrayOf(),
@@ -179,9 +179,9 @@ class ParticlesPicture(
     private fun initParticle() {
         for (x in 0 until bitmap.width step 5) {
             for (y in 0 until bitmap.width step 5) {
-                val r = bitmap.getColor(x, y).red()
-                val g = bitmap.getColor(x, y).green()
-                val b = bitmap.getColor(x, y).blue()
+                val r = bitmap.getPixel(x, y).red / 255f
+                val g = bitmap.getPixel(x, y).green / 255f
+                val b = bitmap.getPixel(x, y).blue / 255f
                 position.add(x * intervalX * 2.0f - 1.0f)
                 position.add(1.0f - y * intervalY * 2.0f)
                 position.add(0f)

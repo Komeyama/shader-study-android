@@ -4,8 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.komeyama.shader_study_android.R
 import com.komeyama.shader_study_android.ui.base.GLRendererBase
 import com.komeyama.shader_study_android.ui.utils.CameraUtils
@@ -24,7 +22,6 @@ class Study14Renderer(val context: Context) : GLRendererBase() {
     private var rollAlignment = 0.01f
     private val distanceFromOrigin = 1.5f
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onSurfaceChanged(unused: GL10, width: Int, height: Int) {
         super.onSurfaceChanged(unused, width, height)
         GLES20.glViewport(0, 0, width, height)
