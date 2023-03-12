@@ -36,9 +36,9 @@ class Study10Renderer : GLRendererBase() {
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
 
         val cameraPositionAndDirection =
-            CameraUtils.changeCameraPointOfView(theta, phi, distanceFromOrigin)
+            CameraUtils.changeCameraPointOfViewUpZ(theta, phi, distanceFromOrigin)
         direction = cameraPositionAndDirection.direction
-        CameraUtils.lookAtCamera(
+        CameraUtils.lookAtCameraUpZ(
             scratch,
             FloatArray(16),
             FloatArray(16),

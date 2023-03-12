@@ -54,7 +54,7 @@ object CameraUtils {
         Matrix.multiplyMM(scratch, 0, cameraProjectionMatrix, 0, cameraViewMatrix, 0)
     }
 
-    fun changeCameraPointOfView(
+    fun changeCameraPointOfViewUpZ(
         theta: Double,
         phi: Double,
         distanceFromOrigin: Float
@@ -70,15 +70,15 @@ object CameraUtils {
         } else if (sin(theta) < 0) {
             direction = -1f
             position = Position(
-                x = (distanceFromOrigin * sin(-theta) * sin(-phi)).toFloat(),
-                y = (distanceFromOrigin * sin(-theta) * cos(-phi)).toFloat(),
+                x = (distanceFromOrigin * sin(-theta) * sin(-phi - Math.PI / 2)).toFloat(),
+                y = (distanceFromOrigin * sin(-theta) * cos(-phi - Math.PI / 2)).toFloat(),
                 z = (distanceFromOrigin * cos(-theta)).toFloat()
             )
         }
         return CameraPositionAndDirection(position, direction)
     }
 
-    fun lookAtCamera(
+    fun lookAtCameraUpZ(
         scratch: FloatArray,
         cameraProjectionMatrix: FloatArray,
         cameraViewMatrix: FloatArray,
