@@ -46,6 +46,11 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
 
     /**
+     * ARCore
+     */
+    implementation("com.google.ar:core:1.36.0")
+
+    /**
      * Groupie
      */
     val groupieVersion = "2.9.0"
