@@ -17,8 +17,10 @@ class Study15SurfaceView(context: Context, attrs: AttributeSet) :
         private const val TAG = "Study15SurfaceView"
     }
 
+    private var textCallback: Callback? = null
+
     override fun getRendererInstance(): Renderer {
-        return Study15Renderer(context)
+        return Study15Renderer(context, this)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -69,6 +71,14 @@ class Study15SurfaceView(context: Context, attrs: AttributeSet) :
 
     fun setScaleFactor(scale: Float) {
         (renderer as Study15Renderer).scaleFactor = scale
+    }
+
+    fun setCallback(callback: Callback) {
+        textCallback = callback
+    }
+
+    fun updateCount(message: String) {
+        post { textCallback?.updatePointCount(message) }
     }
 
     private val gestureDetector = GestureDetector(context, gestureDetectListener)

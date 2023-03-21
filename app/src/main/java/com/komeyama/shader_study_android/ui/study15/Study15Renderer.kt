@@ -11,6 +11,7 @@ import androidx.core.graphics.green
 import androidx.core.graphics.red
 import com.google.ar.core.CameraIntrinsics
 import com.google.ar.core.Session
+import com.google.ar.core.TrackingState
 import com.komeyama.shader_study_android.ui.base.GLRendererBase
 import com.komeyama.shader_study_android.ui.utils.CameraUtils
 import java.io.ByteArrayOutputStream
@@ -22,7 +23,10 @@ import javax.microedition.khronos.opengles.GL10
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
-class Study15Renderer(val context: Context) : GLRendererBase() {
+class Study15Renderer(
+    val context: Context,
+    private val surfaceView: Study15SurfaceView
+) : GLRendererBase() {
 
     private val scratch = FloatArray(16)
     private var aspect = 0f
@@ -92,6 +96,8 @@ class Study15Renderer(val context: Context) : GLRendererBase() {
         try {
             session.setCameraTextureName(0)
             val frame = session.update()
+            if (frame.camera.trackingState != TrackingState.TRACKING) return
+
             val intrinsics = frame.camera.textureIntrinsics
             session.createAnchor(frame.camera.pose).pose.toMatrix(FloatArray(16), 0)
             val depth = frame.acquireDepthImage16Bits()
@@ -101,10 +107,13 @@ class Study15Renderer(val context: Context) : GLRendererBase() {
             val pointCloudBuffer = createPointCloudBuffer(depth, color, bitmap, intrinsics)
             depth.close()
             color.close()
-            pointCloud?.setPositionBuffer(pointCloudBuffer[0])
-            pointCloud?.setColorBuffer(pointCloudBuffer[1])
+            pointCloud?.setPositionBuffer(pointCloudBuffer.positionBuffer)
+            pointCloud?.setColorBuffer(pointCloudBuffer.colorBuffer)
+
+            surfaceView.updateCount(pointCloudBuffer.size.toString())
         } catch (e: Exception) {
             Log.e(TAG, e.toString())
+            surfaceView.updateCount("Not detected!")
         }
     }
 
@@ -124,7 +133,7 @@ class Study15Renderer(val context: Context) : GLRendererBase() {
         color: Image,
         bitmap: Bitmap?,
         cameraTextureIntrinsics: CameraIntrinsics
-    ): Array<FloatBuffer> {
+    ): PositionAndColor {
         val depthByteBufferOriginal = depth.planes[0].buffer
         val depthByteBuffer = ByteBuffer.allocate(depthByteBufferOriginal.capacity())
         depthByteBuffer.order(ByteOrder.LITTLE_ENDIAN)
@@ -154,7 +163,8 @@ class Study15Renderer(val context: Context) : GLRendererBase() {
         val colors =
             createColorBuffer(bitmap, pointCloud.colorYPixels, pointCloud.colorXPixels, step)
 
-        return arrayOf(pointCloud.position, colors)
+        val totalCount = pointCloud.position.array().size / FLOATS_PER_POINT
+        return PositionAndColor(pointCloud.position, colors, totalCount)
     }
 
     private fun createColorPointCloud(

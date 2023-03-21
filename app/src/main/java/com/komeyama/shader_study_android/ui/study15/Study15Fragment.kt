@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.komeyama.shader_study_android.R
 import com.komeyama.shader_study_android.databinding.FragmentStudy15Binding
 
-class Study15Fragment : Fragment(R.layout.fragment_study15) {
+class Study15Fragment : Fragment(R.layout.fragment_study15), Callback {
     private lateinit var glView: Study15SurfaceView
     private var _binding: FragmentStudy15Binding? = null
     private val binding get() = _binding!!
@@ -35,7 +35,8 @@ class Study15Fragment : Fragment(R.layout.fragment_study15) {
         super.onViewCreated(view, savedInstanceState)
         result.launch(Manifest.permission.CAMERA)
         glView = binding.glSurfaceStudy15
-        binding.scaleFactor.addOnChangeListener{ _, value, _ ->
+        glView.setCallback(this)
+        binding.scaleFactor.addOnChangeListener { _, value, _ ->
             glView.setScaleFactor(value)
         }
     }
@@ -44,4 +45,12 @@ class Study15Fragment : Fragment(R.layout.fragment_study15) {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun updatePointCount(count: String) {
+        _binding?.pointNum?.text = count
+    }
+}
+
+interface Callback {
+    fun updatePointCount(count: String)
 }
