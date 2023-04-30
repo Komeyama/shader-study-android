@@ -3,6 +3,7 @@ package com.komeyama.shader_study_android.ui.base
 import android.opengl.GLES20
 import android.os.SystemClock
 import com.komeyama.shader_study_android.ui.ext.allocateDirect
+import com.komeyama.shader_study_android.ui.utils.ShaderUtils
 
 abstract class ShaderBase {
 
@@ -33,32 +34,19 @@ abstract class ShaderBase {
     private var mTimeHandle: Int = 0
 
     init {
-
         val vertexShaderCode: String = this.vertexShaderCode()
         val fragmentShaderCode: String = this.fragmentShaderCode()
-        val vertexShader: Int = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
-        val fragmentShader: Int = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
-
-        program = GLES20.glCreateProgram().also {
-            GLES20.glAttachShader(it, vertexShader)
-            GLES20.glAttachShader(it, fragmentShader)
-            GLES20.glLinkProgram(it)
-        }
+        val vertexShader = ShaderUtils.loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
+        val fragmentShader = ShaderUtils.loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
+        program = ShaderUtils.createProgram(vertexShader, fragmentShader)
+        GLES20.glUseProgram(program)
     }
 
     abstract fun vertexShaderCode(): String
     abstract fun fragmentShaderCode(): String
     abstract fun handleFragmentParameter()
 
-    private fun loadShader(type: Int, shaderCode: String): Int {
-        return GLES20.glCreateShader(type).also { shader ->
-            GLES20.glShaderSource(shader, shaderCode)
-            GLES20.glCompileShader(shader)
-        }
-    }
-
     open fun draw(mvpMatrix: FloatArray) {
-        GLES20.glUseProgram(program)
 
         vPMatrixHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix").also { mvpMatrixHandle ->
             GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0)
