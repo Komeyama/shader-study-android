@@ -1,6 +1,7 @@
 package com.komeyama.shader_study_android.ui.study16
 
 import android.opengl.GLES20
+import android.util.Log
 import com.komeyama.shader_study_android.ui.base.ShaderBase
 import com.komeyama.shader_study_android.ui.utils.ShaderUtils
 
@@ -23,6 +24,7 @@ class Gradation(
     sealed class GradationShaderType {
         data class Vertical(val ids: Int = 0) : GradationShaderType()
         data class Circle(val ids: Int = 1) : GradationShaderType()
+        data class Bilinear(val ids: Int = 2) : GradationShaderType()
     }
 
     var color = initColor
@@ -31,12 +33,18 @@ class Gradation(
 
     private var verticalProgram = program
     private var circleProgram = 0
+    private var bilinearProgram = 1
 
     init {
         val vertexShader = ShaderUtils.loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode())
-        val fragmentShader =
+        val circleFragmentShader =
             ShaderUtils.loadShader(GLES20.GL_FRAGMENT_SHADER, LinearInterpolationShaderCodes.CIRCLE)
-        circleProgram = ShaderUtils.createProgram(vertexShader, fragmentShader)
+        val bilinearFragmentShader = ShaderUtils.loadShader(
+            GLES20.GL_FRAGMENT_SHADER,
+            LinearInterpolationShaderCodes.BILINEAR
+        )
+        circleProgram = ShaderUtils.createProgram(vertexShader, circleFragmentShader)
+        bilinearProgram = ShaderUtils.createProgram(vertexShader, bilinearFragmentShader)
     }
 
     override fun vertexShaderCode(): String {
@@ -56,6 +64,7 @@ class Gradation(
         val program = when (type) {
             is GradationShaderType.Vertical -> verticalProgram
             is GradationShaderType.Circle -> circleProgram
+            is GradationShaderType.Bilinear -> bilinearProgram
         }
         GLES20.glUseProgram(program)
     }

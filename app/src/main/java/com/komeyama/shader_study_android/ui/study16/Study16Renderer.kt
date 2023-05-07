@@ -31,10 +31,16 @@ class Study16Renderer : GLRendererBase() {
     }
 
     fun changeFragmentShader() {
-        if (currentType is Gradation.GradationShaderType.Vertical) {
-            currentType = Gradation.GradationShaderType.Circle()
-        } else if (currentType is Gradation.GradationShaderType.Circle) {
-            currentType = Gradation.GradationShaderType.Vertical()
+        currentType = when (currentType) {
+            is Gradation.GradationShaderType.Vertical -> {
+                Gradation.GradationShaderType.Circle()
+            }
+            is Gradation.GradationShaderType.Circle -> {
+                Gradation.GradationShaderType.Bilinear()
+            }
+            is Gradation.GradationShaderType.Bilinear -> {
+                Gradation.GradationShaderType.Vertical()
+            }
         }
     }
 
