@@ -7,7 +7,7 @@ import com.komeyama.shader_study_android.MainActivity
 import com.komeyama.shader_study_android.ui.base.ShaderBase
 import com.komeyama.shader_study_android.ui.ext.allocateDirect
 
-class AlphaBlend2(
+class SimpleFilter(
     override val drawOrder: ShortArray = shortArrayOf(0, 1, 2, 0, 2, 3),
     override val vertexCoordinates: FloatArray = floatArrayOf(
         -0.5f, 0.5f, 0.0f,
@@ -44,12 +44,12 @@ class AlphaBlend2(
 
     override fun fragmentShaderCode(): String {
         return "" +
-                "uniform sampler2D uTexture;" +
+                "uniform sampler2D uTexture2;" +
                 "" +
-                "varying vec2 vTexCoord;" +
+                "varying vec2 vTexCoord2;" +
                 "" +
                 "void main(void){" +
-                "   vec4 fragColor = texture2D(uTexture, vTexCoord);" +
+                "   vec4 fragColor = texture2D(uTexture2, vTexCoord2);" +
                 "   gl_FragColor = vec4(0.0, 0.0, 1.0, 0.3);" +
                 "}" +
                 ""
@@ -59,19 +59,23 @@ class AlphaBlend2(
         return "" +
                 "uniform mat4 uMVPMatrix;" +
                 "attribute vec4 vPosition;" +
-                "attribute vec2 aTexCoord;" +
+                "attribute vec2 aTexCoord2;" +
                 "" +
-                "varying vec2 vTexCoord;" +
+                "varying vec2 vTexCoord2;" +
                 "" +
                 "void main(void){" +
                 "   gl_Position = uMVPMatrix * vPosition;" +
-                "   vTexCoord = vec2((1.0 - aTexCoord.x), aTexCoord.y);" +
+                "   vTexCoord2 = vec2((1.0 - aTexCoord2.x), aTexCoord2.y);" +
                 "}" +
                 ""
     }
 
     override fun handleFragmentParameter() {
-        GLES20.glGetAttribLocation(program2, "aTexCoord").also { texPositionHandle ->
+        GLES20.glGetUniformLocation(program2, "uTexture2").also {
+            GLES20.glUniform1i(it, 0)
+        }
+
+        GLES20.glGetAttribLocation(program2, "aTexCoord2").also { texPositionHandle ->
             GLES20.glEnableVertexAttribArray(texPositionHandle)
             GLES20.glVertexAttribPointer(
                 texPositionHandle,
