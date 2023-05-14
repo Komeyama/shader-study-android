@@ -3,7 +3,6 @@ package com.komeyama.shader_study_android.ui.study18
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLUtils
-import android.os.SystemClock
 import com.komeyama.shader_study_android.MainActivity
 import com.komeyama.shader_study_android.ui.base.ShaderBase
 import com.komeyama.shader_study_android.ui.ext.allocateDirect
@@ -37,7 +36,6 @@ class StencilFilter(
     }
 
     private val program2 = program
-    private val startTime: Long = SystemClock.uptimeMillis()
 
     init {
         loadTexture(bitmap, width, height)
