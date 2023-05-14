@@ -33,6 +33,7 @@ class TopFragment : Fragment(R.layout.fragment_top) {
             "Point Cloud" to R.id.action_topFragment_to_study15Fragment,
             "Gradation" to R.id.action_topFragment_to_study16Fragment,
             "Alpha Blend" to R.id.action_topFragment_to_study17Fragment,
+            "Stencil" to R.id.action_topFragment_to_study18Fragment,
         )
 
     override fun onCreateView(
